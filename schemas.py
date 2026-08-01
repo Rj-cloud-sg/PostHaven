@@ -39,7 +39,7 @@ class PostBase(BaseModel):   # shared between returning and creating a post
 
 # Defines what we accept when creating a new post
 class PostCreate(PostBase):
-    user_id: int # TEMPORARY: will be replaced with current user from session
+    pass
 
 class PostUpdate(BaseModel):   
     title: str | None = Field(default=None, min_length=1, max_length=100)   # after = are constraints
