@@ -53,3 +53,11 @@ class PostResponse(PostBase):  # PostResponse inherits title, content and author
     user_id: int
     date_posted: datetime
     author: UserPublic # we want to return the author of the post, but not their password or email. We can use UserPublic for that.
+    
+class PaginatedPostsResponse(BaseModel):
+    posts: list[PostResponse]
+    total: int
+    skip: int
+    limit: int
+    has_more: bool
+    
