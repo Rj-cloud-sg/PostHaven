@@ -6,7 +6,7 @@ import httpx
 from sqlalchemy import delete, select, update
 
 import models
-from database import AsyncSessionLocal, engine
+from database import AsyncSessionLocal, engine, Base
 from image_utils import PROFILE_PICS_DIR
 from main import app
 
@@ -243,6 +243,7 @@ async def clear_existing_data() -> None:
 
     # Clear database tables (order respects foreign keys)
     async with AsyncSessionLocal() as db:
+        await db.execute(delete(models.PasswordResetToken))
         await db.execute(delete(models.Post))
         await db.execute(delete(models.User))
         await db.commit()
@@ -282,12 +283,13 @@ async def update_post_dates() -> None:
 
 
 async def populate() -> None:
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     transport = httpx.ASGITransport(app=app)
 
     async with httpx.AsyncClient(
         transport=transport,
         base_url="http://localhost",
-        follow_redirects=True,
     ) as client:
         # Clear existing data (local images first, then database)
         await clear_existing_data()
@@ -297,7 +299,7 @@ async def populate() -> None:
         print(f"\nCreating {len(USERS)} users...")
         for user_data in USERS:
             response = await client.post(
-                "/api/users/",
+                "/api/users",
                 json={
                     "username": user_data["username"],
                     "email": user_data["email"],
