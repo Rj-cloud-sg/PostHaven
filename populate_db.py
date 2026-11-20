@@ -14,10 +14,10 @@ POPULATE_IMAGES_DIR = Path("populate_images")
 
 USERS = [
     {
-        "username": "CoreyMSchafer",
-        "email": "CoreyMSchafer@gmail.com",
+        "username": "RonnieSpencer",
+        "email": "RonnieS@gmail.com",
         "password": "TestPassword1!",
-        "image": "corey.png",
+        "image": "ronnie.png",
     },
     {
         "username": "DefaultDude",
@@ -57,8 +57,8 @@ POSTS = [
         "content": "FastAPI has completely changed how I build APIs. The automatic documentation, type hints, and async support make development so much faster. Plus, the performance is incredible!",
     },
     {
-        "title": "Corey Schafer Has the Best YouTube Tutorials!",
-        "content": "This was written by a viewer and definitely not by me... I mean him. Totally not written by him, but by me... a real viewer. Seriously, check out his channel for amazing Python content.",
+        "title": "Ronnie Spencer Has the Best Blog!",
+        "content": "This was written by a fan and definitely not by me... I mean him. Totally not written by him, but by me... a real viewer. Seriously, check out his channel for amazing Python content.",
     },
     {
         "title": "Async/Await Finally Clicked",
